@@ -3,8 +3,8 @@ defmodule Trinary.Mixfile do
 
   def project do
     [
-      app: :trinary,
-      version: "0.1.0",
+      app: :trilean,
+      version: "1.0.0",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       deps: deps()
