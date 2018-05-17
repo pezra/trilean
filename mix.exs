@@ -4,10 +4,12 @@ defmodule Trinary.Mixfile do
   def project do
     [
       app: :trilean,
-      version: "1.0.0",
+      description: "K3+ three-value logic",
+      version: "1.0.1",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
-      deps: deps()
+      deps: deps(),
+      package: package()
     ]
   end
 
@@ -22,6 +24,14 @@ defmodule Trinary.Mixfile do
   defp deps do
     [
       {:dialyxir, "~> 0.3", only: :dev, runtime: false},
+    ]
+  end
+
+   defp package do
+    [
+      licenses: ["http://opensource.org/licenses/MIT"],
+      maintainers: ["Peter Williams"],
+      links: %{homepage: "http://github.com/pezra/trilean"}
     ]
   end
 end
