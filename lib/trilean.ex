@@ -18,7 +18,7 @@ defmodule Trilean do
   ...> )
   true
   ```
-  I should pack a picnic because it will be a nice day and there could be a spectacle.
+  I should pack a picnic because it will be a nice day and there could be a spectacle to watch. (The sea battle problem is Aristotle's formulation of the [contingent futures problem](https://en.wikipedia.org/wiki/Problem_of_future_contingents) on which three value logics can shed some light.)
 
   ```
   iex> will_there_be_a_sea_battle_tomorrow = Trilean.maybe()

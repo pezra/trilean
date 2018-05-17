@@ -1,64 +1,44 @@
 # Trilean
 
-An implementation of some [three-valued logics](https://en.wikipedia.org/wiki/Three-valued_logic). The third value in this library is `Trilean.maybe()`
+An implementation of the K3+ [three-valued logic](https://en.wikipedia.org/wiki/Three-valued_logic). The third value in this library is `Trilean.maybe()` This is an extension of Kleene's strong logic of indeterminacy.
 
-These logics allow reasoning in the face of uncertainty. Scenarios like the following are possible
+Three value logics allow reasoning in face of uncertainty. For example
 
-```elixir
-iex> if func_with_possibly_indeterminate_result()
-...>    |> Trilean.L3Logic.and(someother_func_with_possibly_indeterminate_result())
-...>    |> Trilean.L3Logic.is_possible() do
-...>   something_interesting()
-...> end
 ```
-
-These logics are algebraic in that every operation returns takes zero or more `Trilean.t()`s and returns a `Trilean.t()`. The `truthy?/1` and `falsy?/1` functions on the various logic modules convert `Trilean.t()` into a binary value based on the rules of the logic in question.
-
-## Priest's Logic
-`Trilean.PriestLogic` is a three value logic in which the indeterminate value is both true and false simultaneously.
-
-Example
-```elixir
-iex> Trilean.PriestLogic.and(true, Trilean.maybe())
+iex> will_a_sea_battle_be_fought_tomorrow = Trilean.maybe()
+...> nice_day_tomorrow = true
+...>
+...> _should_i_pack_a_picnic = (
+...>   will_a_sea_battle_be_fought_tomorrow
+...>   |> Trilean.and(nice_day_tomorrow)
+...>   |> Trilean.possible?()
+...> )
 true
 ```
+I should pack a picnic because it will be a nice day and there could be a spectacle to watch. (The sea battle problem is Aristotle's formulation of the [contingent futures problem](https://en.wikipedia.org/wiki/Problem_of_future_contingents) on which three value logics can shed some light.)
 
-```elixir
-iex> Trilean.maybe()
-...> |> Trilean.PriestLogic.implies(Trilean.maybe())
-Trilean.maybe()
 ```
-
-## Kleene's Logic
-`Trilean.KleeneLogic` is a three value logic in which the indeterminate value is neither true nor false.
-
-Example
-```elixir
-iex> true
-...> |> Trilean.PriestLogic.and(Trilean.maybe())
+iex> will_a_sea_battle_be_fought_tomorrow = Trilean.maybe()
+...> nice_day_tomorrow = false
+...>
+...> _should_i_pack_a_picnic = (
+...>   will_a_sea_battle_be_fought_tomorrow
+...>   |> Trilean.and(nice_day_tomorrow)
+...>   |> Trilean.possible?()
+...> )
 false
 ```
+I should not pack a picnic even though there could be a spectacle because it will be a crummy day.
 
-```elixir
-iex> Trilean.maybe()
-...> |> Trilean.KleeneLogic.implies(Trilean.maybe())
-Trilean.maybe()
+All expressions evaluate the same as they would in normal boolean logic if their inputs are true or false. If, however, one or more of the inputs is `:maybe` then the output may become indeterminate. For example:
+
 ```
-
-## Łukasiewicz Logic
-`Trilean.L3Logic` is a three value logic in which the true is the only designated truth value and "unknown implies unknown" is true.
-
-Example
-```elixir
-iex> true
-...> |> Trilean.L3Logic.and(Trilean.maybe())
-false
-```
-
-```elixir
-iex> Trilean.maybe()
-...> |> Trilean.L3Logic.implies(Trilean.maybe())
+iex> Trilean.and(true, true)
 true
+iex> Trilean.and(true, false)
+false
+iex> Trilean.and(true, Trilean.maybe())
+Trilean.maybe()
 ```
 
 
