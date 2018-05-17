@@ -79,7 +79,8 @@ defmodule Trilean do
   [Logical negation or complement (`¬`)](https://en.wikipedia.org/wiki/Negation)
 
   Truth table
-  |A	| not(A) |
+
+  |A	| ¬A |
   |---|---     |
   |F	| T      |
   |M	| M      |
@@ -111,11 +112,12 @@ defmodule Trilean do
   [Logical cyclic negation](https://en.wikipedia.org/wiki/Cyclic_negation)
 
   Truth table
+
   |A	| cyclic not(A) |
   |---|---     |
-  |F	| T      |
-  |M	| F      |
-  |T	| M      |
+  |**F**	| T      |
+  |**M**	| F      |
+  |**T**	| M      |
 
 
   Examples
@@ -143,6 +145,7 @@ defmodule Trilean do
   [Logical conjunction (`∧`)](https://en.wikipedia.org/wiki/Logical_conjunction)
 
   Truth table
+
   |       | F | M | T |
   |---    |---|---|---|
   | **F** | F | F | F |
@@ -181,6 +184,7 @@ defmodule Trilean do
   [Logical disjunction (`∨`)](https://en.wikipedia.org/wiki/Logical_disjunction)
 
   Truth table
+
   |       | F | M | T |
   |---    |---|---|---|
   | **F** | F | M | T |
@@ -224,11 +228,12 @@ defmodule Trilean do
   [Logical equivalence (`↔` or `≡`)](https://en.wikipedia.org/wiki/Logical_equivalence)
 
   Truth table
-  |       | T | M |	F |
+
+  |       | F | M | T |
   |---    |---|---|---|
-  | **T** |	T |	M |	F |
+  | **F** |	T | M | F |
   | **M** | M | M | M |
-  | **F** |	F |	M |	T |
+  | **T** |	F | M | T |
 
   Examples
 
@@ -258,11 +263,12 @@ defmodule Trilean do
   [Material implication (`→` or `⊃`)](https://en.wikipedia.org/wiki/Material_implication_(rule_of_inference))
 
   Truth table
-  |     |T  | U | F |
-  |--  -|---|---|---|
-  |**T**|T  | U | F |
-  |**U**|T  | U | U |
-  |**F**|T  | T | T |
+
+  |     | F | M | T |
+  |---  |---|---|---|
+  |**F**| T | T | T |
+  |**M**| M | M | T |
+  |**T**| F | M | T |
 
   Examples
   ```elixir
@@ -304,6 +310,12 @@ defmodule Trilean do
   @doc """
   [Logical possibility (or `M` or `◇`)](https://en.wikipedia.org/wiki/Logical_possibility)
 
+  |A	| ◇A |
+  |---|---     |
+  |**F**	| F      |
+  |**M**	| T      |
+  |**T**	| T      |
+
   Examples
 
   ```elixir
@@ -328,6 +340,14 @@ defmodule Trilean do
   @doc """
   [Logical necessity (or `L` or `□`)](https://www.rit.edu/cla/philosophy/quine/necessity.html)
 
+  Truth table
+
+  | A   | □A |
+  |---|---|
+  |**F**| T |
+  |**M**| F |
+  |**T**| T |
+
   Examples
 
   ```elixir
@@ -351,6 +371,12 @@ defmodule Trilean do
 
   @doc """
   Implementation of `I` unary logic operator. "it is unknown that..." or "it is contingent that...".
+
+  |A	| I(A) |
+  |---|---     |
+  |**F**	| F     |
+  |**M**	| T      |
+  |**T**	| F      |
 
   Examples
 
