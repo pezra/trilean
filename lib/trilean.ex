@@ -5,15 +5,33 @@ defmodule Trilean do
   logic](https://en.wikipedia.org/wiki/Three-valued_logic), K3+. This
   is an extension of Kleene's strong logic of indeterminacy.
 
-  Basic value expressions:
+  Three value logics allow reasoning in face of uncertainty. For example
+
   ```
-  iex> Trilean.true()
+  iex> will_there_be_a_sea_battle_tomorrow = Trilean.maybe()
+  ...> nice_day_tomorrow = true
+  ...>
+  ...> _should_i_pack_a_picnic = (
+  ...>   will_there_be_a_sea_battle_tomorrow
+  ...>   |> Trilean.and(nice_day_tomorrow)
+  ...>   |> Trilean.possible?()
+  ...> )
   true
-  iex> Trilean.false()
-  false
-  iex> Trilean.maybe()
-  :maybe
   ```
+  I should pack a picnic because it will be a nice day and there could be a spectacle.
+
+  ```
+  iex> will_there_be_a_sea_battle_tomorrow = Trilean.maybe()
+  ...> nice_day_tomorrow = false
+  ...>
+  ...> _should_i_pack_a_picnic = (
+  ...>   will_there_be_a_sea_battle_tomorrow
+  ...>   |> Trilean.and(nice_day_tomorrow)
+  ...>   |> Trilean.possible?()
+  ...> )
+  false
+  ```
+  I should not pack a picnic even though there could be a spectacle because it will be a crummy day.
 
   All expressions evaluate the same as they would in normal boolean logic if their inputs are true or false. If, however, one or more of the inputs is `:maybe` then the output may become indeterminate. For example:
 
@@ -58,7 +76,7 @@ defmodule Trilean do
   def unquote(:"false")(), do: false
 
   @doc """
-  [Logical negation or complement](https://en.wikipedia.org/wiki/Negation)
+  [Logical negation or complement (`¬`)](https://en.wikipedia.org/wiki/Negation)
 
   Truth table
   |A	| not(A) |
@@ -122,7 +140,7 @@ defmodule Trilean do
   def cyc_neg(@maybe), do: false
 
   @doc """
-  [Logical conjunction](https://en.wikipedia.org/wiki/Logical_conjunction)
+  [Logical conjunction (`∧`)](https://en.wikipedia.org/wiki/Logical_conjunction)
 
   Truth table
   |       | F | M | T |
@@ -160,7 +178,7 @@ defmodule Trilean do
   def unquote(:"and")(_, _), do: @maybe
 
   @doc """
-  [Logical disjunction](https://en.wikipedia.org/wiki/Logical_disjunction)
+  [Logical disjunction (`∨`)](https://en.wikipedia.org/wiki/Logical_disjunction)
 
   Truth table
   |       | F | M | T |
@@ -203,7 +221,7 @@ defmodule Trilean do
 
 
   @doc """
-  [Logical equivalence (↔)](https://en.wikipedia.org/wiki/Logical_equivalence)
+  [Logical equivalence (`↔` or `≡`)](https://en.wikipedia.org/wiki/Logical_equivalence)
 
   Truth table
   |       | T | M |	F |
@@ -237,7 +255,7 @@ defmodule Trilean do
   def equivalence(_,_), do: false
 
   @doc """
-  [Material implication (→)](https://en.wikipedia.org/wiki/Material_implication_(rule_of_inference))
+  [Material implication (`→` or `⊃`)](https://en.wikipedia.org/wiki/Material_implication_(rule_of_inference))
 
   Truth table
   |     |T  | U | F |
@@ -284,7 +302,7 @@ defmodule Trilean do
   def implies(_, _), do: @maybe
 
   @doc """
-  [Logical possibility (or `M` or ◇)](https://en.wikipedia.org/wiki/Logical_possibility)
+  [Logical possibility (or `M` or `◇`)](https://en.wikipedia.org/wiki/Logical_possibility)
 
   Examples
 
@@ -308,7 +326,7 @@ defmodule Trilean do
   def possible?(_), do: true
 
   @doc """
-  [Logical necessity (or `L` or □)](https://www.rit.edu/cla/philosophy/quine/necessity.html)
+  [Logical necessity (or `L` or `□`)](https://www.rit.edu/cla/philosophy/quine/necessity.html)
 
   Examples
 
