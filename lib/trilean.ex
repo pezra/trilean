@@ -64,7 +64,8 @@ defmodule Trilean do
 
   This provided for symmetry with `maybe/0`.
   """
-  @spec unquote(true)() :: Trilean.t()
+  # FIXME: ex_doc 0.19.x..0.21.3 bombs on this type spec
+  # @spec unquote(true)() :: Trilean.t()
   def unquote(true)(), do: true
 
   @doc """
@@ -72,7 +73,8 @@ defmodule Trilean do
 
   This provided for symmetry with `maybe/0`.
   """
-  @spec unquote(false)() :: Trilean.t()
+  # FIXME: ex_doc 0.19.x..0.21.3 bombs on this type spec
+  # @spec unquote(false)() :: Trilean.t()
   def unquote(false)(), do: false
 
   @doc """
