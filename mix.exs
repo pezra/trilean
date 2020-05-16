@@ -1,4 +1,4 @@
-defmodule Trinary.Mixfile do
+defmodule Trilean.Mixfile do
   use Mix.Project
 
   def project do
@@ -24,7 +24,7 @@ defmodule Trinary.Mixfile do
   defp deps do
     [
       {:dialyxir, "~> 0.3", only: :dev, runtime: false},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:ex_doc, "~> 0.21.0", only: :dev}
     ]
   end
 
