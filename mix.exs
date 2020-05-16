@@ -7,7 +7,7 @@ defmodule Trinary.Mixfile do
       description: "K3+ three-value logic",
       version: "1.0.1",
       elixir: "~> 1.5",
-      start_permanent: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
       deps: deps(),
       package: package()
     ]
@@ -28,7 +28,7 @@ defmodule Trinary.Mixfile do
     ]
   end
 
-   defp package do
+  defp package do
     [
       licenses: ["http://opensource.org/licenses/MIT"],
       maintainers: ["Peter Williams"],
