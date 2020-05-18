@@ -64,16 +64,18 @@ defmodule Trilean do
 
   This provided for symmetry with `maybe/0`.
   """
-  @spec unquote(:"true")() :: Trilean.t()
-  def unquote(:"true")(), do: true
+  # FIXME: ex_doc 0.19.x..0.21.3 bombs on this type spec
+  # @spec unquote(true)() :: Trilean.t()
+  def unquote(true)(), do: true
 
   @doc """
   Return the false value.
 
   This provided for symmetry with `maybe/0`.
   """
-  @spec unquote(:"false")() :: Trilean.t()
-  def unquote(:"false")(), do: false
+  # FIXME: ex_doc 0.19.x..0.21.3 bombs on this type spec
+  # @spec unquote(false)() :: Trilean.t()
+  def unquote(false)(), do: false
 
   @doc """
   [Logical negation or complement (`¬`)](https://en.wikipedia.org/wiki/Negation)
@@ -103,10 +105,10 @@ defmodule Trilean do
   Trilean.maybe()
   ```
   """
-  @spec unquote(:"not")(Trilean.t()) :: Trilean.t()
-  def unquote(:"not")(true), do: false
-  def unquote(:"not")(false), do: true
-  def unquote(:"not")(@maybe), do: @maybe
+  @spec unquote(:not)(Trilean.t()) :: Trilean.t()
+  def unquote(:not)(true), do: false
+  def unquote(:not)(false), do: true
+  def unquote(:not)(@maybe), do: @maybe
 
   @doc """
   [Logical cyclic negation](https://en.wikipedia.org/wiki/Cyclic_negation)
@@ -174,11 +176,11 @@ defmodule Trilean do
   ```
 
   """
-  @spec unquote(:"and")(Trilean.t(), Trilean.t()) :: Trilean.t()
-  def unquote(:"and")(true, true), do: true
-  def unquote(:"and")(false, _), do: false
-  def unquote(:"and")(_, false), do: false
-  def unquote(:"and")(_, _), do: @maybe
+  @spec unquote(:and)(Trilean.t(), Trilean.t()) :: Trilean.t()
+  def unquote(:and)(true, true), do: true
+  def unquote(:and)(false, _), do: false
+  def unquote(:and)(_, false), do: false
+  def unquote(:and)(_, _), do: @maybe
 
   @doc """
   [Logical disjunction (`∨`)](https://en.wikipedia.org/wiki/Logical_disjunction)
@@ -217,12 +219,11 @@ defmodule Trilean do
   Trilean.maybe()
   ```
   """
-  @spec unquote(:"or")(Trilean.t(), Trilean.t()) :: Trilean.t()
-  def unquote(:"or")(true, _), do: true
-  def unquote(:"or")(_, true), do: true
-  def unquote(:"or")(false, false), do: false
-  def unquote(:"or")(_, _), do: @maybe
-
+  @spec unquote(:or)(Trilean.t(), Trilean.t()) :: Trilean.t()
+  def unquote(:or)(true, _), do: true
+  def unquote(:or)(_, true), do: true
+  def unquote(:or)(false, false), do: false
+  def unquote(:or)(_, _), do: @maybe
 
   @doc """
   [Logical equivalence (`↔` or `≡`)](https://en.wikipedia.org/wiki/Logical_equivalence)
@@ -256,8 +257,8 @@ defmodule Trilean do
   def equivalence(@maybe, _), do: @maybe
   def equivalence(_, @maybe), do: @maybe
   def equivalence(true, true), do: true
-  def equivalence(false, false ), do: true
-  def equivalence(_,_), do: false
+  def equivalence(false, false), do: true
+  def equivalence(_, _), do: false
 
   @doc """
   [Material implication (`→` or `⊃`)](https://en.wikipedia.org/wiki/Material_implication_(rule_of_inference))
@@ -399,5 +400,4 @@ defmodule Trilean do
   @spec maybe?(Trilean.t()) :: boolean()
   def maybe?(@maybe), do: true
   def maybe?(_), do: false
-
 end
