@@ -5,7 +5,7 @@ defmodule Trinary.Mixfile do
     [
       app: :trilean,
       description: "K3+ three-value logic",
-      version: "1.0.1",
+      version: "1.1.0",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       deps: deps(),
