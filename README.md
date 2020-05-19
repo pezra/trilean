@@ -89,7 +89,7 @@ by adding `trilean` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:trilean, "~> 0.1.0"}
+    {:trilean, "~> 1.1.0"}
   ]
 end
 ```
