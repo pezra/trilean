@@ -1,4 +1,4 @@
-defmodule Trinary.Mixfile do
+defmodule Trilean.Mixfile do
   use Mix.Project
 
   def project do
@@ -7,7 +7,7 @@ defmodule Trinary.Mixfile do
       description: "K3+ three-value logic",
       version: "1.1.0",
       elixir: "~> 1.5",
-      start_permanent: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
       deps: deps(),
       package: package()
     ]
@@ -24,11 +24,11 @@ defmodule Trinary.Mixfile do
   defp deps do
     [
       {:dialyxir, "~> 0.3", only: :dev, runtime: false},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:ex_doc, "~> 0.21.0", only: :dev}
     ]
   end
 
-   defp package do
+  defp package do
     [
       licenses: ["http://opensource.org/licenses/MIT"],
       maintainers: ["Peter Williams"],
