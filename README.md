@@ -15,6 +15,7 @@ iex> will_a_sea_battle_be_fought_tomorrow = Trilean.maybe()
 ...> )
 true
 ```
+
 I should pack a picnic because it will be a nice day and there could be a spectacle to watch. (The sea battle problem is Aristotle's formulation of the [contingent futures problem](https://en.wikipedia.org/wiki/Problem_of_future_contingents) on which three value logics can shed some light.)
 
 ```
@@ -41,7 +42,45 @@ iex> Trilean.and(true, Trilean.maybe())
 Trilean.maybe()
 ```
 
+## Operators
 
+Operators for common uses are defined in `Trilean.Operators`
+
+```
+iex> use Trilean.Operators
+...> will_a_sea_battle_be_fought_tomorrow = maybe()
+...> nice_day_tomorrow = true
+...>
+...> _should_i_pack_a_picnic =
+...>   (will_a_sea_battle_be_fought_tomorrow &&& nice_day_tomorrow)
+...>   |> Trilean.possible?()
+true
+```
+
+Supported operators are
+ - `~~~`: Trilean.not/1
+ - `|||`: Trilean.or/2
+ - `&&&`: Trilean.and/2
+ - `~>`: Trilean.implies/2
+ - `<~>`: Trilean.equivalence/2
+
+## Guards
+
+Guards provided in `Trilean.Guards`.
+
+```
+iex> defmodule Picnic do
+...>   use Trilean.Guards
+...>   use Trilean.Operators
+...>
+...>  def pack_one?(sea_battle, nice_day) when is_possible(sea_battle),
+...>    do: (sea_battle &&& nice_day) |> Trilean.possible?
+...>  def pack_one(_,_), do:  false
+...> end
+...>
+...> Picnic.pack_one?(Trilean.maybe(), true)
+true
+```
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
@@ -58,4 +97,3 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/trilean](https://hexdocs.pm/trilean).
-
